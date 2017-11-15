@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ph.mobiliario.MenuVentas.menu_con_fragment.Carta"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal">
+
+        <Button
+
+            android:id="@+id/btnFrag1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_name_categorias"
+            android:enabled="true"
+            android:text="categorías"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnFrag2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_name_platillos"
+            android:enabled="true"
+            android:text="Platillos"
+            android:textStyle="bold" />
+
+        <Button
+            android:textSize="21sp"
+            android:id="@+id/btnFrag3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_name_shopping_car"
+            android:enabled="true"
+            android:text="$"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contenedor">
+
+    </FrameLayout>
+
+</LinearLayout>

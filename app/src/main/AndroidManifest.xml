@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ph.mobiliario">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/adoy_logo"
+        android:label="Adoy Food"
+        android:roundIcon="@drawable/adoy_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Login.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MenuDinamico.MenuDinamico" />
+        <activity android:name=".Mesas.Mesa" />
+        <activity android:name=".Home.Home" />
+        <activity
+            android:name=".ChecadorBluetooth.ListaChecadorBluetooth"
+            android:label="@string/title_activity_lista_checador_bluetooth"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChecadorBluetooth.ControlChecadorBluetooth" />
+        <activity
+            android:name=".EditPerfi.CambiandoDatos"
+            android:label="@string/title_activity_cambiando_datos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditPerfi.PostActivity"
+            android:label="@string/title_activity_post"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chat.chatconfuncionpredefinisda.chat"
+            android:label="@string/title_activity_chat"
+            android:parentActivityName=".MenuDinamico.MenuDinamico"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ph.mobiliario.MenuDinamico.MenuDinamico" />
+        </activity>
+        <activity
+            android:name=".Chat.users.Usuarios"
+            android:label="@string/title_activity_usuarios"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Chat.chat2"
+            android:label="@string/title_activity_chat2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Soporte.Tiket"
+            android:label="@string/title_activity_tiket" />
+        <activity
+            android:name=".Soporte.agregartiket.AgregarTiket"
+            android:label="@string/title_activity_agregar_tiket" />
+        <activity android:name=".Soporte.chatTC.chatTC" />
+        <activity android:name=".Actividad.Actividad" />
+        <activity android:name=".MenuVentas.menu_con_spinner.MenuVentas" />
+        <activity
+            android:name=".MenuVentas.carta.tabed"
+            android:label="@string/title_activity_tabed"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MenuVentas.catalogo.Bottom"
+            android:theme="@style/AppTheme.TransNav" />
+        <activity android:name=".MenuVentas.Tabs.Tabs" />
+        <activity
+            android:name=".MenuVentas.menu_con_fragment.Carta"
+            android:screenOrientation="locked" />
+        <activity android:name=".Lista_Compras.listaCompras" />
+        <activity android:name=".Inicio.Inicio"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ph.mobiliario.MenuDinamico.MenuDinamico"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!--android:background="#11b9b8b8"-->
+
+    <!-- VERTICAL -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#11b9b8b8"
+        android:layout_above="@+id/frameContadorChats" />
+
+
+    <RelativeLayout
+    android:id="@+id/frameContadorChats"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|right"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabContadorChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:color/transparent" />
+
+    <TextView
+
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="24dp"
+        android:id="@+id/txtContadorChats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="16dp"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txtContadorChats2" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="21sp"
+        android:id="@+id/txtContadorChats2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="16dp"
+        android:text="a"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/frameContadorSoporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabContadorSoporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="24dp"
+            android:id="@+id/txtContadorSoporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/txtContadorSoporte2" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="21sp"
+            android:id="@+id/txtContadorSoporte2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="a"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

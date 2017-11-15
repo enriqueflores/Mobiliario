@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+      <item
+        android:id="@+id/cobrar"
+        android:orderInCategory="100"
+        android:title="cobrar"
+        android:icon="@drawable/money"
+        app:showAsAction="ifRoom" />
+</menu>
+
+

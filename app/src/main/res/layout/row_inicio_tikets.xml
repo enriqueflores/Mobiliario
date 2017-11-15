@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="4dp"
+    android:padding="5dp"
+    android:background="@drawable/input_outline">
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/circle"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="0dp"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5">
+
+        <TextView
+            android:id="@+id/icono"
+            android:layout_width="match_parent"
+            android:textSize="22sp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="A" />
+
+    </LinearLayout>
+
+   <LinearLayout
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_weight=".5">
+
+       <TextView
+           android:gravity="center"
+           android:layout_weight="1"
+           android:id="@+id/titulo"
+           style="@style/RowSubtitle"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="titulo" />
+
+       <TextView
+           android:gravity="center"
+           android:layout_weight="1"
+           android:id="@+id/cantidad"
+           style="@style/RowTitle"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="cantidad"
+        />
+
+   </LinearLayout>
+</LinearLayout>

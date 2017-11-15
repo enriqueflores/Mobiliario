@@ -1,0 +1,18 @@
+<tabs>
+        <tab
+            id="@+id/tab_calls"
+            icon="@drawable/adoy_logo"
+            title="Calls"
+            activeColor="@color/colorAccent"
+            />
+        <tab
+            id="@+id/tab_groups"
+            icon="@drawable/adoy_logo"
+            title="Groups"
+            activeColor="@color/colorAccent" />
+        <tab
+            id="@+id/tab_chats"
+            icon="@drawable/adoy_logo"
+            title="Chats"
+            activeColor="@color/colorAccent"/>
+</tabs>

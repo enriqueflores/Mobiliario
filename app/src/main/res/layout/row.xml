@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="4dp"
+    android:padding="5dp"
+    android:background="@drawable/input_outline"
+
+   >
+
+
+
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/circle"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="0dp"/>
+
+    <TextView
+        android:id="@+id/icono"
+        style="@style/RowTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A"
+        android:paddingLeft="9dp"
+        android:layout_marginTop="6dp"/>
+
+    <TextView
+        android:gravity=""
+        android:layout_marginLeft="10dp"
+        android:id="@+id/titleTextView"
+        style="@style/RowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Actividad"
+
+        android:layout_alignTop="@+id/icono"
+        android:layout_toEndOf="@+id/circleView" />
+
+    <TextView
+        android:id="@+id/tabla"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="tabla"
+        android:paddingLeft="4dp"
+        android:layout_below="@+id/titleTextView"
+        android:layout_alignStart="@+id/titleTextView" />
+
+
+
+
+
+</LinearLayout>

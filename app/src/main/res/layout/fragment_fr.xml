@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ph.mobiliario.MenuVentas.menu_con_fragment.compras.fragmentoCompras">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewCompras"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/frameContadorChats"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#000000"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/fabLiberar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:drawableTop="@drawable/eliminar_todo"
+                android:text="Liberar" />
+
+            <Button
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:id="@+id/fabCobrar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Cobrar"
+                android:drawableTop="@drawable/money"
+                android:layout_weight="1.0" />
+
+
+            <Button
+                android:id="@+id/fabImprimir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                android:backgroundTint="@android:color/transparent"
+                android:drawableTop="@drawable/ic_action_name_imprimir_comanda"
+                android:text="Imprimir Comanda" />
+
+
+            <Button
+                android:id="@+id/fabEstatusEnviado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                android:backgroundTint="@android:color/transparent"
+                android:drawableTop="@android:drawable/ic_menu_send"
+                android:text="Enviar Comanda " />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

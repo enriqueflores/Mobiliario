@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="#000000"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="8dp"
+    android:padding="5dp"
+      >
+    <View
+        android:id="@+id/circleView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/circle"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="0dp"/>
+
+    <TextView
+        android:id="@+id/icono"
+        style="@style/RowTitle2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Actividad"
+
+    />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:gravity="center"
+            android:id="@+id/titleTextView"
+            style="@style/nombreMesa"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actividad"
+            />
+
+        <TextView
+            android:gravity="end"
+            android:layout_weight="1"
+            android:id="@+id/tabla"
+            style="@style/estatusMesa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tabla"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

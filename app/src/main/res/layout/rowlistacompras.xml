@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/input_outline"
+
+    >
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+        android:orientation="vertical">
+
+        <View
+            android:foregroundGravity="right"
+            android:id="@+id/circleView"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/circle"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginRight="5dp"
+        android:id="@+id/nombre"
+        style="@style/RowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nombre"
+        />
+
+    <TextView
+        android:id="@+id/cmax"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cmax"   />
+    <TextView
+        android:id="@+id/cmin"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cmin"   />
+
+    <TextView
+        android:id="@+id/descripcion"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="descripcion"   />
+
+    <TextView
+        android:id="@+id/existencia"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="existencia"   />
+
+    <TextView
+        android:id="@+id/tipo"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tipo"   />
+
+    <TextView
+        android:id="@+id/umedida"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="umedida"   />
+
+</LinearLayout>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="4dp"
+    android:padding="10dp"
+    android:background="@drawable/fondo_submenu">
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+        android:orientation="vertical">
+
+        <View
+            android:foregroundGravity="right"
+            android:id="@+id/circleView"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/circle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/nombreIngrediente"
+            style="@style/RowTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".80"
+            android:text="nombreIngrediente" />
+
+
+
+        <LinearLayout
+            android:layout_weight=".80"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnmenos"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:background="@drawable/boton_quitar"
+                android:textSize="19sp"
+                />
+            <TextView
+                android:textSize="19sp"
+                android:id="@+id/contador"
+                android:gravity="center"
+                android:layout_weight="1.2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"/>
+
+            <Button
+                android:background="@drawable/boton_agregar"
+                android:textSize="19sp"
+                android:id="@+id/btnmas"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".70"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_toEndOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/cantidad"
+            style="@style/existencia"
+         android:layout_gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:drawableLeft="@drawable/ic_action_name_palomita_existencia"
+            android:text="cantidad" />
+
+        <TextView
+
+            android:id="@+id/precioUnitario"
+            style="@style/precio"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="precioUnitario" />
+
+
+        <TextView
+            android:id="@+id/clasificacionIngrediente"
+            style="@style/precio"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="clasificacionIngrediente" />
+
+        <TextView
+            android:id="@+id/nivel"
+            style="@style/precio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nivel" />
+
+        <TextView
+            android:id="@+id/tipo"
+            style="@style/RowSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="tipo" />
+
+        <TextView
+            android:id="@+id/umedida"
+            style="@style/RowSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="umedida" />
+
+        <TextView
+            android:id="@+id/idIngre"
+            style="@style/RowSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="idIngre" />
+
+    </LinearLayout>
+
+
+    <!-- <View
+         android:id="@+id/circleView"
+         android:layout_width="55dp"
+         android:layout_height="55dp"
+         android:background="@drawable/circle"
+         android:layout_marginTop="0dp"
+         android:layout_marginLeft="0dp"/>
+
+     <TextView
+         android:id="@+id/nombreIngrediente"
+         style="@style/RowTitle2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Actividad"
+         android:paddingLeft="9dp"
+         android:layout_marginTop="6dp"/>
+
+     <TextView
+         android:gravity=""
+         android:id="@+id/cantidad"
+         style="@style/RowTitle"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="Actividad"
+         android:layout_marginStart="17dp"
+         android:layout_alignTop="@+id/icono"
+         android:layout_toEndOf="@+id/circleView" />
+
+     <TextView
+         android:id="@+id/clasificacionIngrediente"
+         style="@style/RowSubtitle"
+         android:layout_width="wrap_content"
+         android:layout_height="0dp"
+         android:text="tabla"
+         android:paddingLeft="4dp"
+         android:layout_below="@+id/titleTextView"
+         android:layout_alignStart="@+id/titleTextView" />
+
+     <TextView
+         android:id="@+id/tipo"
+         style="@style/RowTitle2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Actividad"
+         android:paddingLeft="9dp"
+         android:layout_marginTop="6dp"/>
+
+     <TextView
+         android:id="@+id/umedida"
+         style="@style/RowTitle2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Actividad"
+         android:paddingLeft="9dp"
+         android:layout_marginTop="6dp"/>
+
+     <TextView
+         android:id="@+id/contador"
+         style="@style/RowTitle2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Actividad"
+         android:paddingLeft="9dp"
+         android:layout_marginTop="6dp"/>-->
+
+
+
+
+</RelativeLayout>
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/input_outline"
+    >
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+
+        android:orientation="vertical">
+
+        <View
+            android:foregroundGravity="right"
+            android:id="@+id/circleView"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/circle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nombreIngrediente"
+            style="@style/RowTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".80"
+            android:text="nombreIngrediente" />
+
+        <TextView
+            android:id="@+id/cantidad"
+            style="@style/existencia"
+            android:layout_weight="1.15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_action_name_palomita_existencia"
+            android:text="cantidad" />
+
+        <LinearLayout
+            android:layout_weight=".80"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnmenos"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="19sp"
+                />
+            <TextView
+                android:textSize="19sp"
+                android:id="@+id/contador"
+                android:gravity="center"
+                android:layout_weight="1.2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"/>
+
+            <Button
+                android:textSize="19sp"
+                android:id="@+id/btnmas"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight=".70"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:id="@+id/clasificacionIngrediente"
+                style="@style/precio"
+                android:layout_width="match_parent"
+                android:layout_weight="1.15"
+                android:layout_height="wrap_content"
+                android:text="clasificacionIngrediente"
+                />
+
+            <TextView
+                android:id="@+id/tipo"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tipo"
+                />
+
+            <TextView
+                android:id="@+id/umedida"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="umedida"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>-->

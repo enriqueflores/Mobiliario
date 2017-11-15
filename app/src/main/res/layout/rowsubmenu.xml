@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="4dp"
+   android:padding="10dp"
+    android:background="@drawable/fondo_submenu"
+    >
+
+<LinearLayout
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <View
+
+        android:id="@+id/circleView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/circle"
+        />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/titleTextView"
+        style="@style/RowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Actividad" />
+
+        </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/icono"
+        style="@style/RowTitle2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Actividad"
+        />
+    <TextView
+        android:id="@+id/tabla"
+        style="@style/RowSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="tabla"
+       />
+</RelativeLayout>

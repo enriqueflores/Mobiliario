@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_menu_categorias"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp">
+
+        <View
+            android:foregroundGravity="right"
+            android:id="@+id/circleView"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/circle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight=".4"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/clasificacionMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="clasificacionMenu"
+        style="@style/RowTitle" />
+
+    <TextView
+        android:id="@+id/accion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="accion"
+        style="@style/RowSubtitle"
+        />
+
+    <TextView
+        android:textColor="#ff7300"
+        android:id="@+id/comentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="comentario" />
+
+
+</LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1.9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:background="@drawable/eliminar"
+                android:backgroundTint="#ff0900"
+                android:id="@+id/btneliminar"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_weight=".70"
+            android:layout_height="wrap_content">
+
+
+
+
+
+            <TextView
+                android:id="@+id/id"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="id"
+                />
+
+            <TextView
+                android:id="@+id/clasificacionRecurso"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="clasificacionRecurso"
+                />
+            <TextView
+                android:id="@+id/codigoBarras"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="codigoBarras"
+                />
+            <TextView
+                android:id="@+id/estatus"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="estatus"
+                />
+
+            <TextView
+                android:id="@+id/nombre"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="nombre" />
+
+            <TextView
+                android:id="@+id/precio"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="precio"
+                />
+            <TextView
+                android:id="@+id/tipo"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="tipo"
+                />
+
+            <TextView
+                android:id="@+id/destino"
+                style="@style/RowSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="destino"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

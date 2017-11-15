@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/input_outline"
+    android:elevation="50dp"
+    >
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/linearLayout2"
+
+        android:orientation="vertical">
+
+        <View
+            android:foregroundGravity="right"
+            android:id="@+id/circleView"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/circle"
+            />
+    </LinearLayout>
+
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="icono"
+         android:layout_marginTop="38dp"
+         android:layout_marginLeft="12dp"
+         android:textSize="30sp"
+         android:textColor="@android:color/holo_green_dark"
+         android:id="@+id/icono"/>-->
+
+
+    <TextView
+        android:layout_marginRight="5dp"
+
+
+        android:id="@+id/titleTextView"
+        style="@style/RowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Actividad"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/icono"
+        style="@style/RowTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="estatus"
+        android:layout_below="@+id/titleTextView"
+        android:layout_alignParentStart="true"
+        />
+    <TextView
+        android:id="@+id/tabla"
+        style="@style/RowSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tabla"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="65dp" />
+
+
+
+
+
+</LinearLayout>

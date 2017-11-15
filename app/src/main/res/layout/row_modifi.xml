@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_lista_compras"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="5dp">
+
+        <View
+            android:id="@+id/circleView"
+            android:background="@drawable/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="left|right|center_horizontal|fill_horizontal|center|fill" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8">
+
+        <TextView
+            android:id="@+id/nombreIngrediente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nombreIngrediente"
+            style="@style/RowTitle" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nivel:  " style="@style/precio" />
+
+            <TextView
+                android:id="@+id/nivel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nivel"
+                style="@style/precio" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.8">
+
+        <Button
+            android:textSize="19sp"
+            android:id="@+id/btnmenos"
+            android:background="@drawable/radio_check"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:textSize="19sp"
+            android:id="@+id/btnmas"
+            android:background="@drawable/radio_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.7"
+    android:layout_below="@+id/linearLayout3"
+    android:layout_toEndOf="@+id/linearLayout2">
+
+<TextView
+    android:textSize="19sp"
+    android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+    android:id="@+id/contador"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="0" />
+
+<TextView
+    android:id="@+id/destino"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="destino"
+    style="@style/existencia" />
+
+<TextView
+    android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+    android:id="@+id/cantidad"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="cantidad"
+    android:drawableLeft="@drawable/ic_action_name_palomita_existencia"
+    style="@style/existencia" />
+
+<TextView
+    android:id="@+id/precioUnitario"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="precioUnitario"
+    style="@style/precio" />
+
+<TextView
+    android:id="@+id/clasificacionIngrediente"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="clasificacionIngrediente"
+    style="@style/precio" />
+
+<TextView
+    android:id="@+id/tipo"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="tipo"
+    style="@style/RowSubtitle" />
+
+<TextView
+    android:id="@+id/umedida"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="umedida"
+    style="@style/RowSubtitle" />
+
+<TextView
+    android:id="@+id/idIngre"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:text="idIngre"
+    style="@style/RowSubtitle" />
+
+</LinearLayout>
+    </RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1093337970936",
+    "firebase_url": "https://restaurantev2-53908.firebaseio.com",
+    "project_id": "restaurantev2-53908",
+    "storage_bucket": "restaurantev2-53908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093337970936:android:8d59c6f2da450dcc",
+        "android_client_info": {
+          "package_name": "com.example.ph.mobiliario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093337970936-4j0j4i8lobhjptio1mcabmglovmcpb96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG6FTPsQ1ZOfA0klUsoK2CMO8eCaecEVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
