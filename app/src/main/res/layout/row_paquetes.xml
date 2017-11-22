@@ -17,8 +17,8 @@
 
         <View
             android:id="@+id/circleView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/circle"
             android:foregroundGravity="left|right|center_horizontal|fill_horizontal|center|fill" />
     </LinearLayout>

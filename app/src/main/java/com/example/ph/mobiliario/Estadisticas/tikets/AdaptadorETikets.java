@@ -1,4 +1,4 @@
-package com.example.ph.mobiliario.Inicio.tikets;
+package com.example.ph.mobiliario.Estadisticas.tikets;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -12,14 +12,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ph.mobiliario.Login.Login;
+import com.example.ph.mobiliario.R;
 import com.example.ph.mobiliario.MenuDinamico.MenuDinamico;
 import com.example.ph.mobiliario.R;
 
 import java.util.List;
 
-public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder> {
-    public static List<ConstructorITikets> data;
-    private static ClickeadorITikets recyclerViewOnItemClickListener;
+public class AdaptadorETikets extends Adapter<AdaptadorETikets.PaletteViewHolder> {
+    public static List<ConstructorETikets> data;
+    private static ClickeadorETikets recyclerViewOnItemClickListener;
     int colorId;
     int selectedPosition;
 
@@ -56,11 +57,11 @@ public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder
         }
 
         public void onClick(View v) {
-            AdaptadorITikets.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            AdaptadorETikets.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
     }
 
-    public AdaptadorITikets(@NonNull List<ConstructorITikets> data, @NonNull ClickeadorITikets recyclerViewOnItemClickListener) {
+    public AdaptadorETikets(@NonNull List<ConstructorETikets> data, @NonNull ClickeadorETikets recyclerViewOnItemClickListener) {
         this.data = data;
         this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
@@ -71,11 +72,11 @@ public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder
 
     public void onBindViewHolder(PaletteViewHolder holder, int position) {
         this.colorId = Color.parseColor("#4e9f30");
-        ConstructorITikets color = (ConstructorITikets) data.get(position);
+        ConstructorETikets color = (ConstructorETikets) data.get(position);
         holder.getIcono().setText(color.getIcono());
         holder.getCantidad().setText(color.getCantidad());
         holder.getTitulo().setText(color.getTitulo());
-        List<ConstructorITikets> i = data;
+        List<ConstructorETikets> i = data;
         if (holder.getTitulo().getText().toString().equals("Enviado")) {
             holder.getIcono().setTextColor(Color.parseColor("#F44336"));
         }

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ph.mobiliario.Estadisticas.Estadisticas">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Tikets"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewTikets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Mesas"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewMesas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:layout_weight="1.0"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Comandas"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewComandas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:layout_weight="1.0"
+            android:padding="5dp" />
+    </LinearLayout>
+</LinearLayout><LinearLayout
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"><LinearLayout
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_weight="1.0">
+<android.support.design.widget.TextInputLayout
+    android:theme="@style/EditTextWhite"
+    android:id="@+id/textInputLayout2"
+    android:background="@drawable/input_outline"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1.0"
+    android:layout_alignParentBottom="true"
+    android:layout_toStartOf="@+id/button3"
+    android:layout_alignParentStart="true">
+
+    <android.support.design.widget.TextInputEditText
+        android:enabled="false"
+        android:id="@+id/De"
+        android:background="#dfdfdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="De:"
+        android:inputType="textUri|textEmailSubject|textLongMessage|textPostalAddress|textVisiblePassword|textFilter|textWebEmailAddress|numberPassword|datetime|date|time" />
+</android.support.design.widget.TextInputLayout>
+
+<Button
+    android:id="@+id/button3"
+    android:background="#dfdfdf"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1.0"
+    android:layout_alignParentBottom="true"
+    android:onClick="mostrarCalendarioDe"
+    android:layout_alignParentEnd="true" />
+</LinearLayout><LinearLayout
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_weight="1.0">
+<android.support.design.widget.TextInputLayout
+    android:theme="@style/EditTextWhite"
+    android:id="@+id/textInputLayout2"
+    android:background="@drawable/input_outline"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1.0"
+    android:layout_alignParentBottom="true"
+    android:layout_toStartOf="@+id/button3"
+    android:layout_alignParentStart="true">
+
+    <android.support.design.widget.TextInputEditText
+        android:enabled="false"
+        android:id="@+id/A"
+        android:background="#dfdfdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="A:"
+        android:inputType="textUri|textEmailSubject|textLongMessage|textPostalAddress|textVisiblePassword|textFilter|textWebEmailAddress|numberPassword|datetime|date|time" />
+</android.support.design.widget.TextInputLayout>
+
+<Button
+    android:id="@+id/button3"
+    android:background="#dfdfdf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1.0"
+    android:layout_alignParentBottom="true"
+    android:onClick="mostrarCalendarioA"
+    android:layout_alignParentEnd="true" />
+</LinearLayout></LinearLayout>
+
+    </LinearLayout>

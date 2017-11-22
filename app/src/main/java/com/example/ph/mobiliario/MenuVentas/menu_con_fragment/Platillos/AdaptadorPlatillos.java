@@ -145,8 +145,8 @@ public class AdaptadorPlatillos extends Adapter<AdaptadorPlatillos.PaletteViewHo
     }
 
     public AdaptadorPlatillos(@NonNull List<ConstructorPlatillos> data, @NonNull ClickeadorPlatillos recyclerViewOnItemClickListener) {
-        data = data;
-        recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
+        this.data = data;
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

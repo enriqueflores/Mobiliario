@@ -1,17 +1,11 @@
 package com.example.ph.mobiliario.MenuDinamico;
 
 import android.app.FragmentManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +13,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ph.mobiliario.R;
 import com.example.ph.mobiliario.Chat.users.Usuarios;
 import com.example.ph.mobiliario.ChecadorBluetooth.ListaChecadorBluetooth;
 import com.example.ph.mobiliario.EditPerfi.CambiandoDatos;
@@ -31,7 +28,6 @@ import com.example.ph.mobiliario.R;
 import com.example.ph.mobiliario.Soporte.Tiket;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -39,473 +35,306 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDinamico extends AppCompatActivity {
-    public static Typeface font;
-    static RecyclerView recyclerView;
-    public static FragmentManager fm;
-    public static Frag tv;
-    String b;
-    int tamañoAd_permiso;
     private static List<Constructor> colors;
+    public static int contadorChats;
+    public static int contadorSoporte;
+    public static FragmentManager fm;
+    public static Typeface font;
+    public static String nombreGlobal;
+    static RecyclerView recyclerView;
+    public static Frag tv;
+    ArrayList<String> LModulosdeacceso = new ArrayList();
+    ArrayList<String> LdatosMenu = new ArrayList();
+    String f31b;
+    FloatingActionButton fabContadorChat;
+    FloatingActionButton fabContadorSoporte;
+    int f32tamaoAd_permiso;
     String tipo_de_Usuario;
-    public static int contadorChats,contadorSoporte;
-    TextView txtContadorChats,txtContadorChats2;
-    TextView txtContadorSoporte,txtContadorSoporte2;
-    FloatingActionButton fabContadorChat,fabContadorSoporte;
-    @Override
+    TextView txtContadorChats;
+    TextView txtContadorChats2;
+    TextView txtContadorSoporte;
+    TextView txtContadorSoporte2;
+
+    class C02791 implements OnClickListener {
+        C02791() {
+        }
+
+        public void onClick(View view) {
+            MenuDinamico.this.startActivity(new Intent(MenuDinamico.this.getApplicationContext(), Usuarios.class));
+        }
+    }
+
+    class C02802 implements OnClickListener {
+        C02802() {
+        }
+
+        public void onClick(View view) {
+            MenuDinamico.this.startActivity(new Intent(MenuDinamico.this.getApplicationContext(), Tiket.class));
+        }
+    }
+
+    class C07183 implements ValueEventListener {
+        C07183() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            MenuDinamico.contadorSoporte = 0;
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                String w = postSnapshot.getKey();
+                String estatus = String.valueOf(postSnapshot.child("chat").getValue());
+                String receptor = String.valueOf(postSnapshot.child("receptor").getValue());
+                MenuDinamico.this.f_Contador_soporte_mensajes(w);
+            }
+        }
+
+        public void onCancelled(DatabaseError error) {
+            Log.w("TAG", "Failed to read value.", error.toException());
+        }
+    }
+
+    class C07194 implements ValueEventListener {
+        C07194() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                String k = postSnapshot.getKey();
+                String estatus = String.valueOf(postSnapshot.child("estatus").getValue());
+                if (String.valueOf(postSnapshot.child("receptor").getValue()).equals(Login.uidUsuario) && estatus.equals("no-leido")) {
+                    MenuDinamico.contadorSoporte++;
+                }
+            }
+            if (MenuDinamico.contadorSoporte == 0) {
+                MenuDinamico.this.fabContadorSoporte.setVisibility(4);
+                return;
+            }
+            MenuDinamico.this.txtContadorSoporte.setText(MenuDinamico.contadorSoporte + "");
+            MenuDinamico.this.fabContadorSoporte.setVisibility(0);
+        }
+
+        public void onCancelled(DatabaseError error) {
+            Log.w("TAG", "Failed to read value.", error.toException());
+        }
+    }
+
+    class C07205 implements ValueEventListener {
+        C07205() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            MenuDinamico.this.LModulosdeacceso.clear();
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                MenuDinamico.this.LModulosdeacceso.add(String.valueOf(postSnapshot.getKey()));
+                MenuDinamico.this.f_Consulta_Modulo(MenuDinamico.this.LModulosdeacceso);
+            }
+        }
+
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    }
+
+    class C07227 implements ValueEventListener {
+        C07227() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            MenuDinamico.contadorChats = 0;
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                String z = postSnapshot.getKey();
+                String estatus = String.valueOf(postSnapshot.child("estatus").getValue());
+                if (String.valueOf(postSnapshot.child("receptor").getValue()).equals(Login.uidUsuario) && estatus.equals("no-leido")) {
+                    MenuDinamico.contadorChats++;
+                }
+            }
+            if (MenuDinamico.contadorChats == 0) {
+                MenuDinamico.this.fabContadorChat.setVisibility(4);
+                return;
+            }
+            MenuDinamico.this.txtContadorChats.setText(MenuDinamico.contadorChats + "");
+            MenuDinamico.this.fabContadorChat.setVisibility(0);
+        }
+
+        public void onCancelled(DatabaseError error) {
+            Log.w("TAG", "Failed to read value.", error.toException());
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_dinamico);
+        setContentView((int) R.layout.activity_menu_dinamico);
         font = Typeface.createFromAsset(getAssets(), "font/fontawesome-webfont.ttf");
-       /// getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setTitle((CharSequence) "Menu Adoy Food");
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-        txtContadorChats= (TextView) findViewById(R.id.txtContadorChats);
-        txtContadorChats2= (TextView) findViewById(R.id.txtContadorChats2);
-        txtContadorChats2.setTypeface(MenuDinamico.font);
-        txtContadorChats2.setText("\uf0e6");
-
-        txtContadorSoporte= (TextView) findViewById(R.id.txtContadorSoporte);
-        txtContadorSoporte2= (TextView) findViewById(R.id.txtContadorSoporte2);
-        txtContadorSoporte2.setTypeface(MenuDinamico.font);
-        txtContadorSoporte2.setText("\uf29c");
-
-         fabContadorChat = (FloatingActionButton) findViewById(R.id.fabContadorChat);
-         f_Contador_chats();
-
-        fabContadorSoporte = (FloatingActionButton) findViewById(R.id.fabContadorSoporte);
+        getSupportActionBar().setIcon((int) R.drawable.adoy_logo);
+        this.txtContadorChats = (TextView) findViewById(R.id.txtContadorChats);
+        this.txtContadorChats2 = (TextView) findViewById(R.id.txtContadorChats2);
+        this.txtContadorChats2.setTypeface(font);
+        this.txtContadorChats2.setText("");
+        this.txtContadorSoporte = (TextView) findViewById(R.id.txtContadorSoporte);
+        this.txtContadorSoporte2 = (TextView) findViewById(R.id.txtContadorSoporte2);
+        this.txtContadorSoporte2.setTypeface(font);
+        this.txtContadorSoporte2.setText("");
+        this.fabContadorChat = (FloatingActionButton) findViewById(R.id.fabContadorChat);
+        f_Contador_chats();
+        this.fabContadorSoporte = (FloatingActionButton) findViewById(R.id.fabContadorSoporte);
         f_Contador_soporte();
-
-        fabContadorChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(), Usuarios.class);
-                startActivity(intent);
-
-            }
-        });
-
-        fabContadorSoporte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(), Tiket.class);
-                startActivity(intent);
-
-            }
-        });
-
-        Login.progressDoalog.dismiss();
-
-        colors = new ArrayList<Constructor>();
-
-
-        tipo_de_Usuario = getIntent().getExtras().getString("parametro");
-        // Toast.makeText(this,extras,Toast.LENGTH_LONG).show();
-
-        f_Consulta_Permiso(tipo_de_Usuario);
-        //f_Consulta_Permiso(tipo_de_Usuario);
+        this.fabContadorChat.setOnClickListener(new C02791());
+        this.fabContadorSoporte.setOnClickListener(new C02802());
+        colors = new ArrayList();
+        this.tipo_de_Usuario = getIntent().getExtras().getString("parametro");
+        f_Consulta_Permiso(this.tipo_de_Usuario);
         fm = getFragmentManager();
         getSupportActionBar().setDisplayShowCustomEnabled(false);
     }
 
     public void f_Contador_soporte() {
-
-        FirebaseDatabase databaseContadorChats = FirebaseDatabase.getInstance();
-        DatabaseReference myRefContadorChats = databaseContadorChats.getReference().child(Login.restaurante)
-                .child("tickets").child(Login.uidUsuario);
-
-        // Read from the database
-        myRefContadorChats.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                contadorSoporte=0;
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String w = postSnapshot.getKey();
-                    String estatus = String.valueOf(postSnapshot.child("chat").getValue());
-                    String receptor = String.valueOf(postSnapshot.child("receptor").getValue());
-                 f_Contador_soporte_mensajes(w);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-
-
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("tickets").child(Login.uidUsuario).addValueEventListener(new C07183());
     }
 
     public int f_Contador_soporte_mensajes(String w) {
-
-        FirebaseDatabase databaseContadorChats = FirebaseDatabase.getInstance();
-        DatabaseReference myRefContadorChats = databaseContadorChats.getReference().child(Login.restaurante)
-                .child("tickets").child(Login.uidUsuario).child(w).child("chat");
-
-        // Read from the database
-        myRefContadorChats.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    String k = postSnapshot.getKey();
-                    String estatus = String.valueOf(postSnapshot.child("estatus").getValue());
-                    String receptor = String.valueOf(postSnapshot.child("receptor").getValue());
-                    if (receptor.equals(Login.uidUsuario)&&estatus.equals("no-leido"))
-                    {
-                        contadorSoporte++;
-                    }
-
-                }
-                if (contadorSoporte==0)
-                {
-                    fabContadorSoporte.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    txtContadorSoporte.setText(contadorSoporte+"");
-                    fabContadorSoporte.setVisibility(View.VISIBLE);
-                    //mn_Soporte();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("tickets").child(Login.uidUsuario).child(w).child("chat").addListenerForSingleValueEvent(new C07194());
         return contadorSoporte;
     }
 
-    private void f_Consulta_Permiso(final String tipo_de_Usuario) {
-
-
-        DatabaseReference myRefSoporte;
-        myRefSoporte = FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_permiso");
-        //sirve para traer  nodo completo
-        // My top posts by number of stars
-        myRefSoporte.child(tipo_de_Usuario).addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                b = "";
-
-                String snap = null;
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                    //Log.i("postSnap", b = String.valueOf(postSnapshot.getKey()));
-                    b = String.valueOf(postSnapshot.getKey());
-                    f_Consulta_Modulo(b, tipo_de_Usuario);
-                }
-                tamañoAd_permiso = (int) dataSnapshot.getChildrenCount();
-
-
-                snap = String.valueOf(dataSnapshot.getChildren());
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                //Log.w("tag", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
+    private void f_Consulta_Permiso(String tipo_de_Usuario) {
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_permiso").child(tipo_de_Usuario).addValueEventListener(new C07205());
     }
 
-
-    private void f_Consulta_Modulo(String resultadoArr, final String tipo_de_Usuario) {
-
-        final DatabaseReference myRefSoporte;
-        myRefSoporte = FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_modulo");
-
-        myRefSoporte.child(resultadoArr).addValueEventListener(new ValueEventListener() {
-            @Override
+    private void f_Consulta_Modulo(final ArrayList<String> LModulosdeacceso) {
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_modulo").addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
+                MenuDinamico.this.LdatosMenu.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                }
-
-                dataSnapshot.getValue();
-                String mobil = String.valueOf(dataSnapshot.child("mobil").getValue());
-                String key_Id = dataSnapshot.getKey();
-                String icono = String.valueOf(dataSnapshot.child("iconm").getValue());
-                String estatus = String.valueOf(dataSnapshot.child("estatus").getValue());
-                String descripcion = String.valueOf(dataSnapshot.child("description").getValue());
-                String title = String.valueOf(dataSnapshot.child("title").getValue());
-                String url = String.valueOf(dataSnapshot.child("url").getValue());
-                String parent = String.valueOf(dataSnapshot.child("parent").getValue());
-                if (mobil.equals("si"))
-                {
-                    String[] datosMenu = {icono, estatus, descripcion, title, url, key_Id};
-                    f_Llenar_Recycler(datosMenu, tipo_de_Usuario);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // Log.w("tag", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
-    }
-
-    public int f_Contador_chats()
-    {
-
-        FirebaseDatabase databaseContadorChats = FirebaseDatabase.getInstance();
-        DatabaseReference myRefContadorChats = databaseContadorChats.getReference().child(Login.restaurante)
-                .child("chat");
-
-        // Read from the database
-        myRefContadorChats.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                contadorChats=0;
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
-                {
-                    String z = postSnapshot.getKey();
-                    String estatus = String.valueOf(postSnapshot.child("estatus").getValue());
-                    String receptor = String.valueOf(postSnapshot.child("receptor").getValue());
-                    if (receptor.equals(Login.uidUsuario)&&estatus.equals("no-leido"))
-                    {
-                        contadorChats++;
+                    String key_Id = postSnapshot.getKey();
+                    for (int i = 0; i < LModulosdeacceso.size(); i++) {
+                        if (((String) LModulosdeacceso.get(i)).equals(key_Id)) {
+                            String mobil = String.valueOf(postSnapshot.child("mobil").getValue());
+                            String icono = String.valueOf(postSnapshot.child("iconm").getValue());
+                            String estatus = String.valueOf(postSnapshot.child("estatus").getValue());
+                            String descripcion = String.valueOf(postSnapshot.child("description").getValue());
+                            String title = String.valueOf(postSnapshot.child("title").getValue());
+                            String url = String.valueOf(postSnapshot.child("url").getValue());
+                            String parent = String.valueOf(postSnapshot.child("parent").getValue());
+                            if (mobil.equals("si")) {
+                                MenuDinamico.this.LdatosMenu.add(icono + "°" + estatus + "°" + descripcion + "°" + title + "°" + url + "°" + key_Id);
+                            }
+                        }
                     }
                 }
-                if (contadorChats==0)
-                {
-                    fabContadorChat.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    txtContadorChats.setText(contadorChats+"");
-                    fabContadorChat.setVisibility(View.VISIBLE);
-                    //mn_chat();
-                }
+                MenuDinamico.this.f_Llenar_Recycler(MenuDinamico.this.LdatosMenu, MenuDinamico.this.tipo_de_Usuario);
             }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
-return contadorChats;
     }
 
-    public void mn_Soporte()
-    {
-        // Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pubnub.com/console/"));
-        Intent intent = new Intent(this, Tiket.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-        notificationBuilder.setSmallIcon(R.drawable.adoy_logo);
-        notificationBuilder.setContentTitle("Adoy Soporte");
-        notificationBuilder.setContentText("Tienes mensajes de algun Tiket");
-        notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setSound(soundUri);
-        notificationBuilder.setContentIntent(pendingIntent);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
-
+    public int f_Contador_chats() {
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("chat").addValueEventListener(new C07227());
+        return contadorChats;
     }
 
-    public void mn_chat()
-    {
-        // Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.pubnub.com/console/"));
-        Intent intent = new Intent(this, Usuarios.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-        notificationBuilder.setSmallIcon(R.drawable.adoy_logo);
-        notificationBuilder.setContentTitle("Adoy Chat");
-        notificationBuilder.setContentText("Tienes mensajes");
-        notificationBuilder.setAutoCancel(true);
-        notificationBuilder.setSound(soundUri);
-        notificationBuilder.setContentIntent(pendingIntent);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
-    }
-
-    public void f_Llenar_Recycler(final String[] datos, final String tipo_de_Usuario) {
-        //colors = new ArrayList<Constructor>();
-
-        final String titulo = datos[3];
-        String subtitulo = datos[2];
-        String icono = datos[0];
-        String iconHeart = icono;
-        String valHexStr = iconHeart.replace("&#x", "").replace(";", "");
-        long valLong = Long.parseLong(valHexStr,16);
-        icono=(((char)valLong+""));
-        final String url = datos[4];
-        final String keyId = datos[5];
-
-        colors.add(new Constructor(titulo, keyId, icono));
-
-        if (colors.size() > tamañoAd_permiso) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            colors = new ArrayList<Constructor>();
-            f_Consulta_Permiso(tipo_de_Usuario);
+    public void f_Llenar_Recycler(ArrayList<String> datos, String tipo_de_Usuario) {
+        colors.clear();
+        for (int i = 0; i < datos.size(); i++) {
+            String[] aux = ((String) datos.get(i)).split("°");
+            String titulo = aux[3];
+            String subtitulo = aux[2];
+            String icono = ((char) ((int) Long.parseLong(aux[0].replace("&#x", "").replace(";", ""), 16))) + "";
+            String url = aux[4];
+            colors.add(new Constructor(titulo, aux[5], icono));
         }
-
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.clearOnScrollListeners();
         recyclerView.clearOnChildAttachStateChangeListeners();
-
+        final String str = tipo_de_Usuario;
         recyclerView.setAdapter(new Adaptador(colors, new Clickeador() {
-            @Override
             public void onClick(View v, int position) {
-
-                String aux = String.valueOf(colors.get(position).getTabla());
-               // Toast.makeText(MenuDinamico.this, aux, Toast.LENGTH_SHORT).show();
-                F_Consutar_Submenu(aux, url, tipo_de_Usuario);
+                MenuDinamico.nombreGlobal = String.valueOf(((Constructor) MenuDinamico.colors.get(position)).getName());
+                String aux = String.valueOf(((Constructor) MenuDinamico.colors.get(position)).getTabla());
+                Toast.makeText(MenuDinamico.this, MenuDinamico.nombreGlobal, 0).show();
+                MenuDinamico.this.F_Consutar_Submenu(aux, str);
             }
         }));
-        //VERTICAL
-        recyclerView.setLayoutManager(new LinearLayoutManager(MenuDinamico.this));
-        //HORIZONTAL
-        //recyclerView.setLayoutManager(new LinearLayoutManager(Historial.this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.addItemDecoration(new Divider(MenuDinamico.this));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void F_Consutar_Submenu(final String padre, final String url, final String extras) {
-
-        DatabaseReference myRefSoporte;
-        myRefSoporte = FirebaseDatabase.getInstance().getReference()
-                .child(Login.restaurante).child("ad_modulo");
-
-        myRefSoporte.child(padre).child("url").addValueEventListener(new ValueEventListener() {
-            @Override
+    private void F_Consutar_Submenu(final String padre, final String extras) {
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_modulo").child(padre).child("url").addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
+                for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                 }
                 String parapasar = String.valueOf(dataSnapshot.exists());
-                String urlHaciaQueActivity= String.valueOf(dataSnapshot.getValue());
+                String urlHaciaQueActivity = String.valueOf(dataSnapshot.getValue());
                 if (parapasar.equals("false")) {
-                    fm = getFragmentManager();
-                    tv = new Frag(padre, extras);
-                    tv.show(fm,"TV");
-                }
-                else if(urlHaciaQueActivity.equals("/chat/")) {
-                    Intent intent = new Intent(getApplicationContext(), Usuarios.class);
-                    startActivity(intent);
-                }
-                else if(urlHaciaQueActivity.equals("/confChec/")) {
-                    Intent intent = new Intent(getApplicationContext(), ListaChecadorBluetooth.class);
-                    intent.putExtra("parametro", tipo_de_Usuario);
-                    startActivity(intent);
-                }
-                else if(urlHaciaQueActivity.equals("/soporte/")) {
-                    Intent intent = new Intent(getApplicationContext(), Tiket.class);
-                    startActivity(intent);
-                }
-                else if(urlHaciaQueActivity.equals("/home/")) {
-                    Intent intent = new Intent(getApplicationContext(), Inicio.class);
-                    startActivity(intent);
+                    MenuDinamico.fm = MenuDinamico.this.getFragmentManager();
+                    MenuDinamico.tv = new Frag(padre, extras);
+                    MenuDinamico.tv.show(MenuDinamico.fm, "TV");
+                } else if (urlHaciaQueActivity.equals("/chat/")) {
+                    MenuDinamico.this.startActivity(new Intent(MenuDinamico.this.getApplicationContext(), Usuarios.class));
+                } else if (urlHaciaQueActivity.equals("/confChec/")) {
+                    Intent intent = new Intent(MenuDinamico.this.getApplicationContext(), ListaChecadorBluetooth.class);
+                    intent.putExtra("parametro", MenuDinamico.this.tipo_de_Usuario);
+                    MenuDinamico.this.startActivity(intent);
+                } else if (urlHaciaQueActivity.equals("/soporte/")) {
+                    MenuDinamico.this.startActivity(new Intent(MenuDinamico.this.getApplicationContext(), Tiket.class));
+                } else if (urlHaciaQueActivity.equals("/home/")) {
+                    MenuDinamico.this.startActivity(new Intent(MenuDinamico.this.getApplicationContext(), Inicio.class));
                 }
             }
 
-            @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // Log.w("ta000g", "loadPost:onCancelled", databaseError.toException());
             }
         });
     }
 
-    public void cambiarUsuario(View v) {
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
-
     }
 
-    @Override
     protected void onRestart() {
         super.onRestart();
-
     }
 
-    @Override
     protected void onPostResume() {
         super.onPostResume();
     }
 
-    @Override
     protected void onStart() {
         super.onStart();
-
     }
 
-    @Override
     protected void onStop() {
         super.onStop();
     }
 
-    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menus, menu);
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
             Login.f_Salir();
             finish();
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(new Intent(getApplicationContext(), Login.class));
+            return true;
+        } else if (id != R.id.Editar_perfil) {
+            return super.onOptionsItemSelected(item);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), CambiandoDatos.class);
+            intent.putExtra("parametro", this.tipo_de_Usuario);
             startActivity(intent);
             return true;
         }
-
-        if (id == R.id.Editar_perfil) {
-            Intent intent = new Intent(getApplicationContext(), CambiandoDatos.class);
-            intent.putExtra("parametro", tipo_de_Usuario);
-                startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
-
-

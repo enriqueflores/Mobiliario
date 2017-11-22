@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ph.mobiliario.R;
 import com.example.ph.mobiliario.Chat.users.Usuarios;
 import com.example.ph.mobiliario.Login.Login;
 import com.example.ph.mobiliario.R;
@@ -22,124 +24,121 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class CambiandoDatos extends AppCompatActivity {
-
-    private String mPost_key = null;
-    private DatabaseReference mDatabase;
     private ImageView ivFotoUsuario;
+    String ltxtCalleNumero;
+    private DatabaseReference mDatabase;
+    private String mPost_key = null;
+    private TextView tvCalleNumero;
+    private TextView tvCelular;
+    private TextView tvCiudad;
+    private TextView tvCodigoPostal;
+    private TextView tvColonia;
     private TextView tvDisplayNombre;
-    private TextView tvCelular,tvSexo,tvFechaNacimiento,tvCalleNumero,tvColonia,tvCiudad,tvEstado,tvCodigoPostal;
-    String txtDisplayName,txtCelular,txtImage,txtSexo,txtFechaNacimiento,ltxtCalleNumero,txtCalleNumero
-            ,txtColonia,txtCiudad,txtEstado,txtCodigoPostal;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cambiando_datos);
+    private TextView tvEstado;
+    private TextView tvFechaNacimiento;
+    private TextView tvSexo;
+    String txtCalleNumero;
+    String txtCelular;
+    String txtCiudad;
+    String txtCodigoPostal;
+    String txtColonia;
+    String txtDisplayName;
+    String txtEstado;
+    String txtFechaNacimiento;
+    String txtImage;
+    String txtSexo;
 
-        mDatabase = FirebaseDatabase.getInstance().getReference()
-                .child(Login.restaurante).child("ad_persona");
+    class C02681 implements OnClickListener {
+        C02681() {
+        }
 
-        mPost_key = getIntent().getExtras().getString("blog_id");
-        //Toast.makeText(blogSingle.this, post_key, Toast.LENGTH_LONG).show();
-
-        tvCelular = (TextView) findViewById(R.id.tvCelular);
-        ivFotoUsuario = (ImageView) findViewById(R.id.singleBlogImage);
-        tvDisplayNombre = (TextView) findViewById(R.id.tvDisplayName);
-        tvSexo= (TextView) findViewById(R.id.tvSexo);
-        tvFechaNacimiento = (TextView) findViewById(R.id.tvFechaNacimiento);
-        tvCalleNumero= (TextView) findViewById(R.id.tvCalleNumero);
-        tvColonia= (TextView) findViewById(R.id.tvColonia);
-        tvCiudad= (TextView) findViewById(R.id.tvCiudad);
-        tvEstado= (TextView) findViewById(R.id.tvEstado);
-        tvCodigoPostal= (TextView) findViewById(R.id.tvCodigoPostal);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PostActivity.class);
-                intent.putExtra("txtDisplayName", txtDisplayName);
-                intent.putExtra("txtCelular", txtCelular);
-                intent.putExtra("txtImage", txtImage);
-                intent.putExtra("txtSexo", txtSexo);
-                intent.putExtra("txtFechaNacimiento", txtFechaNacimiento);
-                intent.putExtra("txtColonia", txtColonia);
-                intent.putExtra("txtCiudad", txtCiudad);
-                intent.putExtra("txtCalleNumero", txtCalleNumero);
-                intent.putExtra("txtEstado", txtEstado);
-                intent.putExtra("txtCodigoPostal", txtCodigoPostal);
-                startActivity(intent);
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mDatabase.child(Login.uidUsuario).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                 txtDisplayName= (String) dataSnapshot.child("displayName").getValue();
-                 txtCelular = (String) dataSnapshot.child("cel").getValue();
-                 txtImage = (String) dataSnapshot.child("image").getValue();
-                 txtSexo = (String) dataSnapshot.child("sexo").getValue();
-                 txtFechaNacimiento = (String) dataSnapshot.child("fechaNac").getValue();
-                 txtCalleNumero = (String) dataSnapshot.child("domicilio").getValue();
-                 txtColonia = (String) dataSnapshot.child("colonia").getValue();
-                 txtCiudad = (String) dataSnapshot.child("ciudad").getValue();
-                 txtEstado = (String) dataSnapshot.child("estado").getValue();
-                 txtCodigoPostal = (String) dataSnapshot.child("cp").getValue();
-
-                tvDisplayNombre.setText(txtDisplayName);
-                tvCelular.setText(txtCelular);
-                tvSexo.setText(txtSexo);
-                tvFechaNacimiento.setText(txtFechaNacimiento);
-                tvCalleNumero.setText(txtCalleNumero);
-                tvColonia.setText(txtColonia);
-                tvCiudad.setText(txtCiudad);
-                tvEstado.setText(txtEstado);
-                tvCodigoPostal.setText(txtCodigoPostal);
-                Picasso.with(CambiandoDatos.this).load(txtImage).into(ivFotoUsuario);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        public void onClick(View view) {
+            Intent intent = new Intent(CambiandoDatos.this.getApplicationContext(), PostActivity.class);
+            intent.putExtra("txtDisplayName", CambiandoDatos.this.txtDisplayName);
+            intent.putExtra("txtCelular", CambiandoDatos.this.txtCelular);
+            intent.putExtra("txtImage", CambiandoDatos.this.txtImage);
+            intent.putExtra("txtSexo", CambiandoDatos.this.txtSexo);
+            intent.putExtra("txtFechaNacimiento", CambiandoDatos.this.txtFechaNacimiento);
+            intent.putExtra("txtColonia", CambiandoDatos.this.txtColonia);
+            intent.putExtra("txtCiudad", CambiandoDatos.this.txtCiudad);
+            intent.putExtra("txtCalleNumero", CambiandoDatos.this.txtCalleNumero);
+            intent.putExtra("txtEstado", CambiandoDatos.this.txtEstado);
+            intent.putExtra("txtCodigoPostal", CambiandoDatos.this.txtCodigoPostal);
+            CambiandoDatos.this.startActivity(intent);
+        }
     }
 
-    @Override
+    class C06932 implements ValueEventListener {
+        C06932() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            CambiandoDatos.this.txtDisplayName = (String) dataSnapshot.child("displayName").getValue();
+            CambiandoDatos.this.txtCelular = (String) dataSnapshot.child("cel").getValue();
+            CambiandoDatos.this.txtImage = (String) dataSnapshot.child("image").getValue();
+            CambiandoDatos.this.txtSexo = (String) dataSnapshot.child("sexo").getValue();
+            CambiandoDatos.this.txtFechaNacimiento = (String) dataSnapshot.child("fechaNac").getValue();
+            CambiandoDatos.this.txtCalleNumero = (String) dataSnapshot.child("domicilio").getValue();
+            CambiandoDatos.this.txtColonia = (String) dataSnapshot.child("colonia").getValue();
+            CambiandoDatos.this.txtCiudad = (String) dataSnapshot.child("ciudad").getValue();
+            CambiandoDatos.this.txtEstado = (String) dataSnapshot.child("estado").getValue();
+            CambiandoDatos.this.txtCodigoPostal = (String) dataSnapshot.child("cp").getValue();
+            CambiandoDatos.this.tvDisplayNombre.setText(CambiandoDatos.this.txtDisplayName);
+            CambiandoDatos.this.tvCelular.setText(CambiandoDatos.this.txtCelular);
+            CambiandoDatos.this.tvSexo.setText(CambiandoDatos.this.txtSexo);
+            CambiandoDatos.this.tvFechaNacimiento.setText(CambiandoDatos.this.txtFechaNacimiento);
+            CambiandoDatos.this.tvCalleNumero.setText(CambiandoDatos.this.txtCalleNumero);
+            CambiandoDatos.this.tvColonia.setText(CambiandoDatos.this.txtColonia);
+            CambiandoDatos.this.tvCiudad.setText(CambiandoDatos.this.txtCiudad);
+            CambiandoDatos.this.tvEstado.setText(CambiandoDatos.this.txtEstado);
+            CambiandoDatos.this.tvCodigoPostal.setText(CambiandoDatos.this.txtCodigoPostal);
+            Picasso.with(CambiandoDatos.this).load(CambiandoDatos.this.txtImage).into(CambiandoDatos.this.ivFotoUsuario);
+        }
+
+        public void onCancelled(DatabaseError databaseError) {
+        }
+    }
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView((int) R.layout.activity_cambiando_datos);
+        getSupportActionBar().setTitle((CharSequence) "Mi perfil");
+        this.mDatabase = FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_persona");
+        this.mPost_key = getIntent().getExtras().getString("blog_id");
+        this.tvCelular = (TextView) findViewById(R.id.tvCelular);
+        this.ivFotoUsuario = (ImageView) findViewById(R.id.singleBlogImage);
+        this.tvDisplayNombre = (TextView) findViewById(R.id.tvDisplayName);
+        this.tvSexo = (TextView) findViewById(R.id.tvSexo);
+        this.tvFechaNacimiento = (TextView) findViewById(R.id.tvFechaNacimiento);
+        this.tvCalleNumero = (TextView) findViewById(R.id.tvCalleNumero);
+        this.tvColonia = (TextView) findViewById(R.id.tvColonia);
+        this.tvCiudad = (TextView) findViewById(R.id.tvCiudad);
+        this.tvEstado = (TextView) findViewById(R.id.tvEstado);
+        this.tvCodigoPostal = (TextView) findViewById(R.id.tvCodigoPostal);
+        ((FloatingActionButton) findViewById(R.id.fab)).setOnClickListener(new C02681());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.mDatabase.child(Login.uidUsuario).addValueEventListener(new C06932());
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menus, menu);
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.logout) {
+        if (item.getItemId() == R.id.logout) {
             Login.f_Salir();
             finish();
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivity(intent);
+            startActivity(new Intent(getApplicationContext(), Login.class));
             return true;
         }
-
         switch (item.getItemId()) {
-            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+            case 16908332:
                 Log.i("ActionBar", "Atrás!");
                 Intent singleBlogIntent = new Intent(this, Usuarios.class);
-
-                //startActivity(singleBlogIntent);
-
                 finish();
-
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

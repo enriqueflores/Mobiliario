@@ -46,82 +46,55 @@ public class Carta extends AppCompatActivity implements OnFragmentInteractionLis
     String pnombreMesero;
     String ptotal;
 
-    class C02811 implements OnClickListener {
-        C02811() {
-        }
-
-        public void onClick(View view) {
-            fragmentoCategorias fragmento1 = new fragmentoCategorias();
-            FragmentTransaction transicion = Carta.this.getSupportFragmentManager().beginTransaction();
-            transicion.replace(R.id.contenedor, fragmento1);
-            transicion.commit();
-            Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_select);
-            Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-            Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-        }
-    }
-
-    class C02822 implements OnClickListener {
-        C02822() {
-        }
-
-        public void onClick(View view) {
-            fragmentoPlatillos fragmento2 = new fragmentoPlatillos();
-            FragmentTransaction transicion2 = Carta.this.getSupportFragmentManager().beginTransaction();
-            transicion2.replace(R.id.contenedor, fragmento2);
-            transicion2.commit();
-            Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-            Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_select);
-            Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-        }
-    }
-
-    class C02833 implements OnClickListener {
-        C02833() {
-        }
-
-        public void onClick(View view) {
-            fragmentoCompras fragmento = new fragmentoCompras();
-            FragmentTransaction transicion = Carta.this.getSupportFragmentManager().beginTransaction();
-            transicion.replace(R.id.contenedor, fragmento);
-            transicion.commit();
-            Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-            Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-            Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_select);
-        }
-    }
-
-    class C07284 implements ValueEventListener {
-        C07284() {
-        }
-
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            if (String.valueOf(dataSnapshot.exists()).equals("false")) {
-                Mesa.f_estus_mesa("Libre");
-            }
-            String a = "1";
-        }
-
-        public void onCancelled(DatabaseError error) {
-        }
-    }
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((int) R.layout.activity_carta);
         btnfr1 = (Button) findViewById(R.id.btnFrag1);
         btnfr2 = (Button) findViewById(R.id.btnFrag2);
         btnfr3 = (Button) findViewById(R.id.btnFrag3);
-        fragmentoCategorias fragmento1 = new fragmentoCategorias();
+        fragmentoCategorias fragmento1= new fragmentoCategorias();
         FragmentTransaction transicion = getSupportFragmentManager().beginTransaction();
         transicion.replace(R.id.contenedor, fragmento1);
         transicion.commit();
         btnfr1.setBackgroundResource(R.drawable.fondo_frag_select);
         btnfr2.setBackgroundResource(R.drawable.fondo_frag_des_sel);
         btnfr3.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-        btnfr1.setOnClickListener(new C02811());
-        btnfr2.setOnClickListener(new C02822());
-        btnfr3.setOnClickListener(new C02833());
+        btnfr1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentoCategorias fragmento1 = new fragmentoCategorias();
+                FragmentTransaction transicion = Carta.this.getSupportFragmentManager().beginTransaction();
+                transicion.replace(R.id.contenedor, fragmento1);
+                transicion.commit();
+                Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_select);
+                Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+                Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+            }
+        });
+        btnfr2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentoPlatillos fragmento2 = new fragmentoPlatillos();
+                FragmentTransaction transicion2 = Carta.this.getSupportFragmentManager().beginTransaction();
+                transicion2.replace(R.id.contenedor, fragmento2);
+                transicion2.commit();
+                Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+                Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_select);
+                Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+            }
+        });
+        btnfr3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentoCompras fragmento = new fragmentoCompras();
+                FragmentTransaction transicion = Carta.this.getSupportFragmentManager().beginTransaction();
+                transicion.replace(R.id.contenedor, fragmento);
+                transicion.commit();
+                Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+                Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+                Carta.btnfr3.setBackgroundResource(R.drawable.fondo_frag_select);
+            }
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(Mesa.nomMesa);
         fmIng = getFragmentManager();
@@ -148,7 +121,20 @@ public class Carta extends AppCompatActivity implements OnFragmentInteractionLis
 
     protected void onPause() {
         super.onPause();
-        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("listaCompras").child(Mesa.idComanda).child("Lista").addValueEventListener(new C07284());
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("listaCompras").child(Mesa.idComanda).child("Lista").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (String.valueOf(dataSnapshot.exists()).equals("false")) {
+                    Mesa.f_estus_mesa("Libre");
+                }
+                String a = "1";
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void onFragmentInteraction(Uri uri) {

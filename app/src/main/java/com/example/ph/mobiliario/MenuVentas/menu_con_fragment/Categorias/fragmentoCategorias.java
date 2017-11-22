@@ -14,7 +14,6 @@ import com.example.ph.mobiliario.R;
 import com.example.ph.mobiliario.Login.Login;
 import com.example.ph.mobiliario.MenuVentas.menu_con_fragment.Carta;
 import com.example.ph.mobiliario.MenuVentas.menu_con_fragment.Platillos.fragmentoPlatillos;
-import com.example.ph.mobiliario.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,7 +25,7 @@ public class fragmentoCategorias extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static List<ConstructorCategorias> colorsCategorias;
-    static RecyclerView recyclerViewCategorias;
+     RecyclerView recyclerView;
     public static String selCategoria = "nada";
     public static String selCategoriaNombre = "nada";
     ArrayList<String> LCategorias = new ArrayList();
@@ -37,23 +36,6 @@ public class fragmentoCategorias extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-
-    class C07302 implements ClickeadorCategorias {
-        C07302() {
-        }
-
-        public void onClick(View v, int position) {
-            fragmentoCategorias.selCategoria = String.valueOf(((ConstructorCategorias) fragmentoCategorias.colorsCategorias.get(position)).getTabla());
-            fragmentoCategorias.selCategoriaNombre = String.valueOf(((ConstructorCategorias) fragmentoCategorias.colorsCategorias.get(position)).getName());
-            fragmentoPlatillos fragmento2 = new fragmentoPlatillos();
-            FragmentTransaction transicion2 = fragmentoCategorias.this.getActivity().getSupportFragmentManager().beginTransaction();
-            transicion2.replace(R.id.contenedor, fragmento2);
-            transicion2.commit();
-            Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
-            Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_select);
-        }
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -66,6 +48,7 @@ public class fragmentoCategorias extends Fragment {
         View v = inflater.inflate(R.layout.fragment_fr1, container, false);
         Carta.Frame = "fragmentoCategorias";
         f_Consulta_Categorias(v);
+
         return v;
     }
 
@@ -94,11 +77,25 @@ public class fragmentoCategorias extends Fragment {
             String[] aux = ((String) msj.get(i)).split("°");
             colorsCategorias.add(new ConstructorCategorias(aux[0], aux[1], ""));
         }
-        recyclerViewCategorias = (RecyclerView) v.findViewById(R.id.recyclerViewCategorias);
-        recyclerViewCategorias.clearOnScrollListeners();
-        recyclerViewCategorias.clearOnChildAttachStateChangeListeners();
-        recyclerViewCategorias.setAdapter(new AdaptadorCategorias(colorsCategorias, new C07302()));
-        recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        recyclerView.clearOnScrollListeners();
+        recyclerView.clearOnChildAttachStateChangeListeners();
+        recyclerView.setAdapter(new AdaptadorCategorias(colorsCategorias, new ClickeadorCategorias() {
+            @Override
+            public void onClick(View view, int position) {
+                fragmentoCategorias.selCategoria = String.valueOf(((ConstructorCategorias) fragmentoCategorias.colorsCategorias.get(position)).getTabla());
+                fragmentoCategorias.selCategoriaNombre = String.valueOf(((ConstructorCategorias) fragmentoCategorias.colorsCategorias.get(position)).getName());
+                fragmentoPlatillos fragmento2 = new fragmentoPlatillos();
+                FragmentTransaction transicion2 = fragmentoCategorias.this.getActivity().getSupportFragmentManager().beginTransaction();
+                transicion2.replace(R.id.contenedor, fragmento2);
+                transicion2.commit();
+                Carta.btnfr1.setBackgroundResource(R.drawable.fondo_frag_des_sel);
+                Carta.btnfr2.setBackgroundResource(R.drawable.fondo_frag_select);
+            }
+        }));
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     public void onButtonPressed(Uri uri) {

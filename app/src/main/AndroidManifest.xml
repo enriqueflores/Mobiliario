@@ -76,7 +76,9 @@
             android:name=".MenuVentas.menu_con_fragment.Carta"
             android:screenOrientation="locked" />
         <activity android:name=".Lista_Compras.listaCompras" />
-        <activity android:name=".Inicio.Inicio"></activity>
+        <activity android:name=".Inicio.Inicio" />
+        <activity android:name=".Estadisticas.Estadisticas" />
+        <activity android:name=".Catalogo.Catalogo" />
     </application>
 
 </manifest>

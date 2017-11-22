@@ -1,4 +1,4 @@
-package com.example.ph.mobiliario.Inicio.tikets;
+package com.example.ph.mobiliario.Inicio.Mesas;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -17,9 +17,9 @@ import com.example.ph.mobiliario.R;
 
 import java.util.List;
 
-public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder> {
-    public static List<ConstructorITikets> data;
-    private static ClickeadorITikets recyclerViewOnItemClickListener;
+public class AdaptadorIMesas extends Adapter<AdaptadorIMesas.PaletteViewHolder> {
+    public static List<ConstructorIMesas> data;
+    private static ClickeadorIMesas recyclerViewOnItemClickListener;
     int colorId;
     int selectedPosition;
 
@@ -56,36 +56,36 @@ public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder
         }
 
         public void onClick(View v) {
-            AdaptadorITikets.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            AdaptadorIMesas.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
     }
 
-    public AdaptadorITikets(@NonNull List<ConstructorITikets> data, @NonNull ClickeadorITikets recyclerViewOnItemClickListener) {
+    public AdaptadorIMesas(@NonNull List<ConstructorIMesas> data, @NonNull ClickeadorIMesas recyclerViewOnItemClickListener) {
         this.data = data;
         this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PaletteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_inicio_tikets, parent, false));
+        return new PaletteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_inicio_mesas, parent, false));
     }
 
     public void onBindViewHolder(PaletteViewHolder holder, int position) {
         this.colorId = Color.parseColor("#4e9f30");
-        ConstructorITikets color = (ConstructorITikets) data.get(position);
+        ConstructorIMesas color = (ConstructorIMesas) data.get(position);
         holder.getIcono().setText(color.getIcono());
         holder.getCantidad().setText(color.getCantidad());
         holder.getTitulo().setText(color.getTitulo());
-        List<ConstructorITikets> i = data;
-        if (holder.getTitulo().getText().toString().equals("Enviado")) {
+        List<ConstructorIMesas> i = data;
+        if (holder.getTitulo().getText().toString().equals("Ocupadas")) {
             holder.getIcono().setTextColor(Color.parseColor("#F44336"));
         }
-        if (holder.getTitulo().getText().toString().equals("Espera")) {
-            holder.getIcono().setTextColor(Color.parseColor("#FFEB3B"));
+        if (holder.getTitulo().getText().toString().equals("Bloqueadas")) {
+            holder.getIcono().setTextColor(Color.parseColor("#607D8B"));
         }
-        if (holder.getTitulo().getText().toString().equals("Resolviendo")) {
+        if (holder.getTitulo().getText().toString().equals("Registradas")) {
             holder.getIcono().setTextColor(Color.parseColor("#009688"));
         }
-        if (holder.getTitulo().getText().toString().equals("Resuelto")) {
+        if (holder.getTitulo().getText().toString().equals("Libres")) {
             holder.getIcono().setTextColor(Color.parseColor("#4CAF50"));
         }
         ((GradientDrawable) holder.getCircleView().getBackground()).setColor(this.colorId);

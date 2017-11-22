@@ -1,11 +1,11 @@
-package com.example.ph.mobiliario.Inicio.tikets;
+package com.example.ph.mobiliario.Inicio.Comandas;
 
-public class ConstructorITikets {
+public class ConstructorIComandas {
     private String cantidad;
     private String icono;
     private String titulo;
 
-    public ConstructorITikets(String titulo, String cantidad, String icono) {
+    public ConstructorIComandas(String titulo, String cantidad, String icono) {
         this.titulo = titulo;
         this.cantidad = cantidad;
         this.icono = icono;

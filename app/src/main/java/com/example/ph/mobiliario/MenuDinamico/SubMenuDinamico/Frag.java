@@ -13,184 +13,150 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ph.mobiliario.Actividad.Actividad;
+//import com.example.ph.mobiliario.Estadisticas.Estadisticas;
 import com.example.ph.mobiliario.Lista_Compras.listaCompras;
 import com.example.ph.mobiliario.Login.Login;
+import com.example.ph.mobiliario.MenuDinamico.MenuDinamico;
 import com.example.ph.mobiliario.Mesas.Mesa;
 import com.example.ph.mobiliario.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.ph.mobiliario.MenuDinamico.MenuDinamico.fm;
-import static com.example.ph.mobiliario.MenuDinamico.MenuDinamico.tv;
-
-/**
- * Created by ph on 21/07/2017.
- */
+//import com.example.ph.mobiliario.Estadisticas.Estadisticas;
 
 public class Frag extends DialogFragment {
-    static RecyclerView recyclerView;
-    String Resultado, ResultadoArr, padre, extras;
-    static View rootView;
     private static List<ConstructorFrag> colorsFrag;
+    static RecyclerView recyclerView;
+    static View rootView;
+    String Resultado;
+    String ResultadoArr;
     String[] arrHeredado;
+    String extras;
+    String padre;
     int tam;
 
+    class C07251 implements ValueEventListener {
+        C07251() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                String hijosdePadre = postSnapshot.getKey();
+                Log.i("HIJOS wereber ", hijosdePadre);
+                Frag.this.f_Consulta_Modulo(hijosdePadre);
+            }
+            Frag.this.tam = (int) dataSnapshot.getChildrenCount();
+            Log.i("TAm", String.valueOf(Frag.this.tam));
+        }
+
+        public void onCancelled(DatabaseError databaseError) {
+            Log.w("tag", "loadPost:onCancelled", databaseError.toException());
+        }
+    }
+
+    class C07262 implements ValueEventListener {
+        C07262() {
+        }
+
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+            }
+            dataSnapshot.getValue();
+            String mobil = String.valueOf(dataSnapshot.child("mobil").getValue());
+            String key_Id=dataSnapshot.getKey();
+            Log.i("key_id", dataSnapshot.getKey());
+            String icono = String.valueOf(dataSnapshot.child("iconm").getValue());
+            String estatus = String.valueOf(dataSnapshot.child("estatus").getValue());
+            String descripcion = String.valueOf(dataSnapshot.child("description").getValue());
+            String title = String.valueOf(dataSnapshot.child("title").getValue());
+            String url = String.valueOf(dataSnapshot.child("url").getValue());
+            String parent = String.valueOf(dataSnapshot.child("parent").getValue());
+            if (mobil.equals("si")) {
+                Log.i("mobil", mobil);
+                Frag.this.f_Llenar_Recycler_Frag(new String[]{icono, estatus, descripcion, title, url, key_Id});
+            }
+        }
+
+        public void onCancelled(DatabaseError databaseError) {
+            Log.w("tag", "loadPost:onCancelled", databaseError.toException());
+        }
+    }
+
+    class C07273 implements ClickeadorFrag {
+        C07273() {
+        }
+
+        public void onClick(View v, int position) {
+            String aux = String.valueOf(((ConstructorFrag) Frag.colorsFrag.get(position)).getName());
+            if (aux.equals("Lista de compras")) {
+                Frag.this.startActivity(new Intent(Frag.rootView.getContext(), listaCompras.class));
+            }
+            if (aux.equals("Comandas")) {
+                Frag.this.startActivity(new Intent(Frag.rootView.getContext(), Mesa.class));
+            }
+            if (aux.equals("Preparación")) {
+                Toast.makeText(Frag.rootView.getContext(), "Servicio disponible en pagina Web", 1).show();
+            }
+            if (aux.equals("Actividad")) {
+                Frag.this.startActivity(new Intent(Frag.rootView.getContext(), Actividad.class));
+            }
+            if (aux.equals("Estadísticas")) {
+                //Frag.this.startActivity(new Intent(Frag.rootView.getContext(), Estadisticas.class));
+            }
+            MenuDinamico.tv.dismiss();
+        }
+    }
 
     public Frag(String padre, String extras) {
         this.padre = padre;
         this.extras = extras;
     }
 
-
     @Nullable
-    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
         rootView = inflater.inflate(R.layout.fragment_blank, container);
-        colorsFrag = new ArrayList<ConstructorFrag>();
-        f_Consulta_hijos(padre, extras);
-        //f_Llenar_Recycler_Frag(arrHeredado);
-
-        this.getDialog().setTitle("Submenu");
+        colorsFrag = new ArrayList();
+        f_Consulta_hijos(this.padre, this.extras);
+        getDialog().setTitle(MenuDinamico.nombreGlobal);
         return rootView;
     }
 
     private void f_Consulta_hijos(String padre, String extras) {
-
-        DatabaseReference myRefSoporte;
-        myRefSoporte = FirebaseDatabase.getInstance().getReference().child(Login.restaurante)
-                .child("ad_permiso").child(extras).child(padre);
-        //sirve para traer  nodo completo
-        // My top posts by number of stars
-        myRefSoporte.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                    String hijosdePadre = postSnapshot.getKey();
-                    Log.i("HIJOS wereber ", hijosdePadre);
-                    f_Consulta_Modulo(hijosdePadre);
-                }
-                tam = (int) dataSnapshot.getChildrenCount();
-                Log.i("TAm", String.valueOf(tam));
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("tag", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_permiso").child(extras).child(padre).addValueEventListener(new C07251());
     }
 
     private void f_Consulta_Modulo(String resultadoArr) {
-        DatabaseReference myRefSoporte;
-        myRefSoporte = FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_modulo");
-        //sirve para traer  nodo completo
-        // My top posts by number of stars
-        myRefSoporte.child(resultadoArr).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // TODO: handle the post
-                }
-                dataSnapshot.getValue();
-                String mobil = String.valueOf(dataSnapshot.child("mobil").getValue());
-                String key_Id = dataSnapshot.getKey();
-                Log.i("key_id", key_Id);
-                String icono = String.valueOf(dataSnapshot.child("iconm").getValue());
-                String estatus = String.valueOf(dataSnapshot.child("estatus").getValue());
-                String descripcion = String.valueOf(dataSnapshot.child("description").getValue());
-                String title = String.valueOf(dataSnapshot.child("title").getValue());
-                String url = String.valueOf(dataSnapshot.child("url").getValue());
-                String parent = String.valueOf(dataSnapshot.child("parent").getValue());
-                //ResultadoModulo = String.valueOf(dataSnapshot.getValue());
-                if (mobil.equals("si"))
-                {
-                    Log.i("mobil",mobil);
-                    String[] datosMenu = {icono, estatus, descripcion, title, url,key_Id};
-                    f_Llenar_Recycler_Frag(datosMenu);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("tag", "loadPost:onCancelled", databaseError.toException());
-            }
-        });
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("ad_modulo").child(resultadoArr).addValueEventListener(new C07262());
     }
 
-    public void f_Llenar_Recycler_Frag(final String[] datos) {
-        // colorsFrag = new ArrayList<ConstructorFrag>();
-        final String titulo = datos[3],
-                subtitulo = datos[2],
-                icono = datos[0],
-                url = datos[4];
-        final String keyId = datos[5];
-
-        colorsFrag.add(new ConstructorFrag(titulo, keyId, icono));
-        if (colorsFrag.size() > tam) {
+    public void f_Llenar_Recycler_Frag(String[] datos) {
+        String titulo = datos[3];
+        String subtitulo = datos[2];
+        String icono = datos[0];
+        String url = datos[4];
+        colorsFrag.add(new ConstructorFrag(titulo, datos[5], icono));
+        if (colorsFrag.size() > this.tam) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            colorsFrag = new ArrayList<ConstructorFrag>();
-            //colorsFrag.clear();
-            tv.dismiss();
-            //f_Consulta_hijos(padre);
-            fm = getFragmentManager();
-            tv = new Frag(padre, extras);
-            tv.show(fm, "TV");
-
-            // Toast.makeText(MenuDinamico.this, "colors se paso",Toast.LENGTH_SHORT).show();
+            colorsFrag = new ArrayList();
+            MenuDinamico.tv.dismiss();
+            MenuDinamico.fm = getFragmentManager();
+            MenuDinamico.tv = new Frag(this.padre, this.extras);
+            MenuDinamico.tv.show(MenuDinamico.fm, "TV");
         }
         Log.i("tamaño", String.valueOf(colorsFrag.size()));
-
-
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewFrag);
         recyclerView.clearOnScrollListeners();
-        recyclerView.setAdapter(new AdaptadorFrag(colorsFrag, new ClickeadorFrag() {
-            @Override
-            public void onClick(View v, int position) {
-                String aux = String.valueOf(colorsFrag.get(position).getName());
-                Toast.makeText(rootView.getContext(), url + "  posicion: " + position, Toast.LENGTH_SHORT).show();
-                if (url.equals("/listaCompras/")) {
-                    Intent intent = new Intent(rootView.getContext(), listaCompras.class);//
-                    startActivity(intent);
-                }
-                if (url.equals("/comandas/")) {
-                    Intent intent = new Intent(rootView.getContext(), Mesa.class);//
-                    startActivity(intent);
-                }
-                if (url.equals("/home/")) {
-                  //  Intent intent = new Intent(rootView.getContext(), Home.class);//
-                   // startActivity(intent);
-                }
-                if (aux.equals("Actividad")) {
-                    Intent intent = new Intent(rootView.getContext(), Actividad.class);//
-                    startActivity(intent);
-                }
-            }
-
-        }));
-        //VERTICAL
+        recyclerView.setAdapter(new AdaptadorFrag(colorsFrag, new C07273()));
         recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-        //HORIZONTAL
-        //recyclerView.setLayoutManager(new LinearLayoutManager(Historial.this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.addItemDecoration(new DividerFrag(rootView.getContext()));
-
     }
-
-
-
 }

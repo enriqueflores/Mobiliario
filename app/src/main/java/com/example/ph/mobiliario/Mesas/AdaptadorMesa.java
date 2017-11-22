@@ -18,7 +18,6 @@ import java.util.List;
 import static android.support.v7.content.res.AppCompatResources.getDrawable;
 
 
-
 public class AdaptadorMesa extends RecyclerView.Adapter<AdaptadorMesa.PaletteViewHolder> {
     static public List<ConstructorMesa> data;
     private static ClickeadorMesa recyclerViewOnItemClickListener;
@@ -28,14 +27,14 @@ public class AdaptadorMesa extends RecyclerView.Adapter<AdaptadorMesa.PaletteVie
 
     public AdaptadorMesa(@NonNull List<ConstructorMesa> data,
                          @NonNull ClickeadorMesa
-                             recyclerViewOnItemClickListener) {
+                                 recyclerViewOnItemClickListener) {
         this.data = data;
         this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     @Override
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         row = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowmesa, parent, false);
+        row = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowmesa, parent, false);
         return new PaletteViewHolder(row);
     }
 
@@ -54,22 +53,17 @@ public class AdaptadorMesa extends RecyclerView.Adapter<AdaptadorMesa.PaletteVie
       /*  if (color.getIcono().equals("\uF00C")) {
             colorId = android.graphics.Color.parseColor("#009688");
         }*/
-if (color.getTabla().equals("Ocupada")) {
-    //row.setBackgroundColor(Color.parseColor("#B71C1C"));
-    row.setBackgroundResource(R.drawable.fondo_mesa_ocupada);
-}
-
-       else if (color.getTabla().equals("Libre")) {
-    row.setBackgroundResource(R.drawable.fondo_mesa_libre);
+        if (color.getTabla().equals("Ocupada")) {
+            //row.setBackgroundColor(Color.parseColor("#B71C1C"));
+            row.setBackgroundResource(R.drawable.fondo_mesa_ocupada);
+        } else if (color.getTabla().equals("Libre")) {
+            row.setBackgroundResource(R.drawable.fondo_mesa_libre);
+        } else if (color.getTabla().equals("Reservada")) {
+            row.setBackgroundResource(R.drawable.fondo_mesa_reservada);
         }
 
-else if (color.getTabla().equals("Reservada")) {
-    row.setBackgroundResource(R.drawable.fondo_mesa_reservada);
-}
 
-
-
-            holder.getTitleTextView().setText(color.getName());
+        holder.getTitleTextView().setText(color.getName());
 
 
         holder.getTabla().setText(color.getTabla());

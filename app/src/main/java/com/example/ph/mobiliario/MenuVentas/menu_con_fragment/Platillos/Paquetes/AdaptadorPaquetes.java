@@ -124,11 +124,11 @@ public class AdaptadorPaquetes extends Adapter<AdaptadorPaquetes.PaletteViewHold
     }
 
     public AdaptadorPaquetes(@NonNull List<ConstructorPaquetes> data, @NonNull ClickeadorPaquetes recyclerViewOnItemClickListener, int prueba, Context context) {
-        dataFrag = data;
-        recyclerViewOnItemClickListenerFrag = recyclerViewOnItemClickListener;
+        this.dataFrag = data;
+        this.recyclerViewOnItemClickListenerFrag = recyclerViewOnItemClickListener;
         this.prueba = prueba;
         this.context = context;
-        this.pref = context.getSharedPreferences("data", 0);
+        pref = context.getSharedPreferences("data", 0);
     }
 
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

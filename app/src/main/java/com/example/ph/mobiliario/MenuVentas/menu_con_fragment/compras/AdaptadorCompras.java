@@ -122,8 +122,8 @@ public class AdaptadorCompras extends Adapter<AdaptadorCompras.PaletteViewHolder
     }
 
     public AdaptadorCompras(@NonNull List<ConstructorCompras> data, @NonNull ClickeadorCompras recyclerViewOnItemClickListener) {
-        data = data;
-        recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
+        this.data = data;
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -1,4 +1,4 @@
-package com.example.ph.mobiliario.Inicio.tikets;
+package com.example.ph.mobiliario.Estadisticas.Comandas;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ph.mobiliario.Login.Login;
-import com.example.ph.mobiliario.MenuDinamico.MenuDinamico;
 import com.example.ph.mobiliario.R;
+import com.example.ph.mobiliario.MenuDinamico.MenuDinamico;
 
 import java.util.List;
 
-public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder> {
-    public static List<ConstructorITikets> data;
-    private static ClickeadorITikets recyclerViewOnItemClickListener;
+public class AdaptadorEComandas extends Adapter<AdaptadorEComandas.PaletteViewHolder> {
+    public static List<ConstructorEComandas> data;
+    private static ClickeadorEComandas recyclerViewOnItemClickListener;
     int colorId;
     int selectedPosition;
 
@@ -56,37 +56,34 @@ public class AdaptadorITikets extends Adapter<AdaptadorITikets.PaletteViewHolder
         }
 
         public void onClick(View v) {
-            AdaptadorITikets.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            AdaptadorEComandas.recyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
     }
 
-    public AdaptadorITikets(@NonNull List<ConstructorITikets> data, @NonNull ClickeadorITikets recyclerViewOnItemClickListener) {
+    public AdaptadorEComandas(@NonNull List<ConstructorEComandas> data, @NonNull ClickeadorEComandas recyclerViewOnItemClickListener) {
         this.data = data;
         this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     public PaletteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PaletteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_inicio_tikets, parent, false));
+        return new PaletteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_inicio_comandas, parent, false));
     }
 
     public void onBindViewHolder(PaletteViewHolder holder, int position) {
         this.colorId = Color.parseColor("#4e9f30");
-        ConstructorITikets color = (ConstructorITikets) data.get(position);
+        ConstructorEComandas color = (ConstructorEComandas) data.get(position);
         holder.getIcono().setText(color.getIcono());
         holder.getCantidad().setText(color.getCantidad());
         holder.getTitulo().setText(color.getTitulo());
-        List<ConstructorITikets> i = data;
-        if (holder.getTitulo().getText().toString().equals("Enviado")) {
-            holder.getIcono().setTextColor(Color.parseColor("#F44336"));
+        List<ConstructorEComandas> i = data;
+        if (holder.getTitulo().getText().toString().equals("Entregadas")) {
+            holder.getIcono().setTextColor(Color.parseColor("#FF5722"));
         }
-        if (holder.getTitulo().getText().toString().equals("Espera")) {
-            holder.getIcono().setTextColor(Color.parseColor("#FFEB3B"));
-        }
-        if (holder.getTitulo().getText().toString().equals("Resolviendo")) {
-            holder.getIcono().setTextColor(Color.parseColor("#009688"));
-        }
-        if (holder.getTitulo().getText().toString().equals("Resuelto")) {
+        if (holder.getTitulo().getText().toString().equals("Cocinando")) {
             holder.getIcono().setTextColor(Color.parseColor("#4CAF50"));
+        }
+        if (holder.getTitulo().getText().toString().equals("Pagando")) {
+            holder.getIcono().setTextColor(Color.parseColor("#009688"));
         }
         ((GradientDrawable) holder.getCircleView().getBackground()).setColor(this.colorId);
     }

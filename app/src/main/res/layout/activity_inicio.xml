@@ -1,34 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.ph.mobiliario.Inicio.Inicio"
-    android:orientation="horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.example.ph.mobiliario.Inicio.Inicio">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewTikets"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/frameContadorChats"
-        android:layout_weight="1"
-        android:padding="5dp"/>
+        android:layout_weight="1.0"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:padding="5dp"
-        android:layout_weight="1"
-        android:id="@+id/recyclerViewMesas"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Tikets"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewTikets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/frameContadorChats" />
+        android:layout_weight="1.0"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:padding="5dp"
-        android:layout_weight="1"
-        android:id="@+id/recyclerViewComandas"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Mesas"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewMesas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:layout_weight="1.0"
+            android:padding="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/frameContadorChats" />
+        android:layout_weight="1.0"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:padding="5dp"
+            android:text="Comandas"
+            android:textColor="#607d8b"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewComandas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/frameContadorChats"
+            android:layout_weight="1.0"
+            android:padding="5dp" />
+    </LinearLayout>
 
 </LinearLayout>

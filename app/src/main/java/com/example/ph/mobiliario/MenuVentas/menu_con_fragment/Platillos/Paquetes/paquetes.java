@@ -71,23 +71,9 @@ public class paquetes extends DialogFragment {
     SharedPreferences pref;
     int variable;
 
-    class C02951 implements OnClickListener {
-        C02951() {
-        }
 
-        public void onClick(View view) {
-            paquetes.this.f_agre_Dism_ingre();
-        }
-    }
 
-    class C02962 implements OnClickListener {
-        C02962() {
-        }
 
-        public void onClick(View view) {
-            paquetes.this.f_agre_Dism_ingre();
-        }
-    }
 
     class C02986 implements DialogInterface.OnClickListener {
         C02986() {
@@ -103,49 +89,7 @@ public class paquetes extends DialogFragment {
 
         @RequiresApi(api = 23)
         public void onDataChange(DataSnapshot dataSnapshot) {
-            int su;
-            paquetes.colorsSub.clear();
-            paquetes.LAuxNombre.clear();
-            paquetes.LAuxCantidad.clear();
-            paquetes.LAuxIdIngre.clear();
-            paquetes.this.LIngredientes.clear();
-            ArrayList<Integer> nivelesAUX = new ArrayList();
-            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                nivelesAUX.add(Integer.valueOf(Integer.parseInt(String.valueOf(postSnapshot.child("nivel").getValue()))));
-            }
-            for (int q = 0; q < nivelesAUX.size(); q++) {
-                int aux = ((Integer) nivelesAUX.get(q)).intValue();
-                int j = 0;
-                for (int b = 0; b < nivelesAUX.size(); b++) {
-                    if (((Integer) nivelesAUX.get(b)).intValue() == aux) {
-                        if (j == 1) {
-                            nivelesAUX.remove(q);
-                        }
-                        j = 1;
-                    }
-                }
-            }
-            Editor editor = paquetes.this.pref.edit();
-            for (su = 0; su <= nivelesAUX.size(); su++) {
-                editor.putInt((su + 1) + "", -1);
-                editor.commit();
-            }
-            for (su = 0; su <= nivelesAUX.size(); su++) {
-                for (DataSnapshot postSnapshot2 : dataSnapshot.getChildren()) {
-                    String id = postSnapshot2.getKey();
-                    int count = (int) dataSnapshot.getChildrenCount();
-                    String nombre = String.valueOf(postSnapshot2.child("nombre").getValue());
-                    String cantidad = String.valueOf(postSnapshot2.child("cantidad").getValue());
-                    String clasificacionIngrediente = String.valueOf(postSnapshot2.child("clasificacionIngrediente").getValue());
-                    String tipo = String.valueOf(postSnapshot2.child("tipo").getValue());
-                    String umedida = String.valueOf(postSnapshot2.child("umedida").getValue());
-                    String nivel = String.valueOf(postSnapshot2.child("nivel").getValue());
-                    if (Integer.parseInt(nivel) == su) {
-                        paquetes.this.LIngredientes.add(nombre + "°" + cantidad + "°" + clasificacionIngrediente + "°" + tipo + "°" + umedida + "°" + id + "°" + nivel);
-                    }
-                }
-                paquetes.this.f_Llenar_Recycler_Frag(paquetes.this.LIngredientes);
-            }
+
         }
 
         public void onCancelled(DatabaseError databaseError) {
@@ -162,24 +106,34 @@ public class paquetes extends DialogFragment {
     }
 
     public paquetes(String selIdClasificacion, String tipo, String Selnombre, String SelPrecio, String SelIdPlatillo, String SelDestino) {
-        selIdClasificacion = selIdClasificacion;
-        tipo = tipo;
-        SelNombre = Selnombre;
-        SelPrecio = SelPrecio;
-        SelIdPlatillo = SelIdPlatillo;
-        SelDestino = SelDestino;
+        this.selIdClasificacion = selIdClasificacion;
+        this.tipo = tipo;
+        this.SelNombre = Selnombre;
+        this.SelPrecio = SelPrecio;
+        this.SelIdPlatillo = SelIdPlatillo;
+        this.SelDestino = SelDestino;
     }
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_paquetes, container);
-        this.btnEditarIngredientes2 = (Button) rootView.findViewById(R.id.btnEditarIngredientes2);
-        this.btnEditarIngredientes = (Button) rootView.findViewById(R.id.btnEditarIngredientes);
+        btnEditarIngredientes2 =  rootView.findViewById(R.id.btnEditarIngredientes2);
+        this.btnEditarIngredientes =  rootView.findViewById(R.id.btnEditarIngredientes);
         colorsSub = new ArrayList();
         f_Consulta_hijos_Radio();
-        this.btnEditarIngredientes.setOnClickListener(new C02951());
-        this.btnEditarIngredientes2.setOnClickListener(new C02962());
-        this.pref = rootView.getContext().getSharedPreferences("data", 0);
+       btnEditarIngredientes.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paquetes.this.f_agre_Dism_ingre();
+            }
+        });
+       btnEditarIngredientes2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paquetes.this.f_agre_Dism_ingre();
+            }
+        });
+        pref = rootView.getContext().getSharedPreferences("data", 0);
         getDialog().setTitle("Productos");
         return rootView;
     }
@@ -332,7 +286,61 @@ public class paquetes extends DialogFragment {
     }
 
     private void f_Consulta_hijos_Radio() {
-        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("recursos").child(selIdClasificacion).child(tipo).child(SelIdPlatillo).child("ingredientes").addValueEventListener(new C07364());
+        FirebaseDatabase.getInstance().getReference().child(Login.restaurante).child("recursos")
+                .child(selIdClasificacion).child(tipo).child(SelIdPlatillo).child("ingredientes")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int su;
+                        paquetes.colorsSub.clear();
+                        paquetes.LAuxNombre.clear();
+                        paquetes.LAuxCantidad.clear();
+                        paquetes.LAuxIdIngre.clear();
+                        paquetes.this.LIngredientes.clear();
+                        ArrayList<Integer> nivelesAUX = new ArrayList();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            nivelesAUX.add(Integer.valueOf(Integer.parseInt(String.valueOf(postSnapshot.child("nivel").getValue()))));
+                        }
+                        for (int q = 0; q < nivelesAUX.size(); q++) {
+                            int aux = ((Integer) nivelesAUX.get(q)).intValue();
+                            int j = 0;
+                            for (int b = 0; b < nivelesAUX.size(); b++) {
+                                if (((Integer) nivelesAUX.get(b)).intValue() == aux) {
+                                    if (j == 1) {
+                                        nivelesAUX.remove(q);
+                                    }
+                                    j = 1;
+                                }
+                            }
+                        }
+                        Editor editor = paquetes.this.pref.edit();
+                        for (su = 0; su <= nivelesAUX.size(); su++) {
+                            editor.putInt((su + 1) + "", -1);
+                            editor.commit();
+                        }
+                        for (su = 0; su <= nivelesAUX.size(); su++) {
+                            for (DataSnapshot postSnapshot2 : dataSnapshot.getChildren()) {
+                                String id = postSnapshot2.getKey();
+                                int count = (int) dataSnapshot.getChildrenCount();
+                                String nombre = String.valueOf(postSnapshot2.child("nombre").getValue());
+                                String cantidad = String.valueOf(postSnapshot2.child("cantidad").getValue());
+                                String clasificacionIngrediente = String.valueOf(postSnapshot2.child("clasificacionIngrediente").getValue());
+                                String tipo = String.valueOf(postSnapshot2.child("tipo").getValue());
+                                String umedida = String.valueOf(postSnapshot2.child("umedida").getValue());
+                                String nivel = String.valueOf(postSnapshot2.child("nivel").getValue());
+                                if (Integer.parseInt(nivel) == su) {
+                                    paquetes.this.LIngredientes.add(nombre + "°" + cantidad + "°" + clasificacionIngrediente + "°" + tipo + "°" + umedida + "°" + id + "°" + nivel);
+                                }
+                            }
+                            paquetes.this.f_Llenar_Recycler_Frag(paquetes.this.LIngredientes);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     @RequiresApi(api = 23)
@@ -383,6 +391,8 @@ public class paquetes extends DialogFragment {
     }
 
     public void f_Llenar_Recycler_Frag(ArrayList<String> LIngredientes) {
+       // if (!LIngredientes.isEmpty())
+        {
         int i;
         double sumatoria = 0.0d;
         for (i = 0; i <= LIngredientes.size() - 1; i++) {
@@ -404,13 +414,13 @@ public class paquetes extends DialogFragment {
             String str = "";
         }
         for (i = 0; i <= LIngredientes.size() - 1; i++) {
-            double   unidBase = 0.0d;
+            double unidBase = 0.0d;
             String[] aux = ((String) LIngredientes.get(i)).split("°");
             String nombre = aux[0];
-            String  cantidad = aux[1];
+            String cantidad = aux[1];
             String clasificacionIngrediente = aux[2];
             String tipo = aux[3];
-            String  umedida = aux[4];
+            String umedida = aux[4];
             String idIngre = aux[5];
             String nivel = aux[6];
             double cant = Double.parseDouble(cantidad);
@@ -428,10 +438,11 @@ public class paquetes extends DialogFragment {
             this.variable++;
         }
         recyclerViewSub = (RecyclerView) rootView.findViewById(R.id.recyclerViewIngr);
-        recyclerViewSub.clearOnScrollListeners();
+       recyclerViewSub.clearOnScrollListeners();
         recyclerViewSub.setAdapter(new AdaptadorPaquetes(colorsSub, new C07377(), this.variable, rootView.getContext()));
         recyclerViewSub.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
         LIngredientes.clear();
+    }
     }
 
     private void f_agre_Dism_Paquetes() {

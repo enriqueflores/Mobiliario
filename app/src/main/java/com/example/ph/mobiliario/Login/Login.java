@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,8 +28,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ph.mobiliario.Actividad.Actividad;
+import com.example.ph.mobiliario.Chat.users.Usuarios;
+import com.example.ph.mobiliario.EditPerfi.CambiandoDatos;
+import com.example.ph.mobiliario.EditPerfi.PostActivity;
+import com.example.ph.mobiliario.Estadisticas.Estadisticas;
+import com.example.ph.mobiliario.Inicio.Inicio;
 import com.example.ph.mobiliario.MenuDinamico.MenuDinamico;
 import com.example.ph.mobiliario.MenuVentas.menu_con_fragment.Carta;
+import com.example.ph.mobiliario.Mesas.Mesa;
 import com.example.ph.mobiliario.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,8 +65,11 @@ import static com.example.ph.mobiliario.Mesas.Mesa.idComanda;
 
 public class Login extends AppCompatActivity {
     public static String name;
-    //public static String link = "https://softadmin.adoysystems.com/php/searchProyect.php";
-    public static String link = "https://admin.adoysystems.com/php/searchProyect.php";//110
+    public static Typeface font;
+    String jai="";
+   // public static String link = "https://softadmin.adoysystems.com/php/searchProyect.php";
+    public static String link = "http://admintest.adoysystems.com/php/searchProyect.php";
+    //public static String link = "https://admin.adoysystems.com/php/searchProyect.php";//110
     String glog, nombre,n;
     String estatusPago, empezar;
     int id;
@@ -80,7 +91,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        font = Typeface.createFromAsset(getAssets(), "font/fontawesome-webfont.ttf");
         mail = (EditText) findViewById(R.id.txtmail);
         pass = (EditText) findViewById(R.id.txtpass);
 
@@ -360,7 +371,6 @@ if (MeseroActual.equals(Login.uidUsuario)) {
         return milisegundosparaKey;
     }
 
-
     public static boolean compruebaConexion(Context context) {
         String nombreRed = null;
         boolean connected = false;
@@ -460,7 +470,7 @@ if (MeseroActual.equals(Login.uidUsuario)) {
     private void f_Hacia_Donde_Dirige(String tipoUsuario) {
         f_logg("Acceso", "/perfil/", "ad_persona");
 
-        Intent intent = new Intent(getApplicationContext(), MenuDinamico.class);
+        Intent intent = new Intent(getApplicationContext(), Estadisticas.class);
         intent.putExtra("parametro", tipoUsuario);
         //  if (empezar.equals("si"))
         {
@@ -519,6 +529,7 @@ if (MeseroActual.equals(Login.uidUsuario)) {
                     break;
                 }
                 glog = sb.toString();
+                //glog="{\"id\":1,\"nombre\":\"ad\",\"estatus\":\"Pagado\"}";
             } catch (Exception ignored) {
             }
             return null;
@@ -569,14 +580,9 @@ if (MeseroActual.equals(Login.uidUsuario)) {
         }
     }
 
-
-
-
-
     public void sign(View v) {
         f_sincronizar();
     }
-
 
     @Override
     public void onStart() {
